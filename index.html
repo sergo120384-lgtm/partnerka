@@ -51,10 +51,6 @@
       color: transparent;
       margin-bottom: 8px;
     }
-    .auth-card p {
-      color: #3a4a3c;
-      margin-bottom: 24px;
-    }
     .ios-input {
       background: rgba(255,255,255,0.9);
       border: 0.5px solid rgba(0,0,0,0.1);
@@ -65,7 +61,6 @@
       text-align: center;
       letter-spacing: 2px;
       font-weight: 500;
-      transition: all 0.2s;
     }
     .ios-input:focus {
       outline: none;
@@ -102,10 +97,9 @@
       padding: 20px 24px;
       margin-bottom: 20px;
       display: flex;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
       justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
     }
     .partner-info {
       display: flex;
@@ -123,17 +117,6 @@
       font-size: 28px;
       color: #2c6e2f;
     }
-    .partner-name {
-      font-weight: 600;
-      font-size: 20px;
-    }
-    .partner-id-badge {
-      background: rgba(0,0,0,0.05);
-      padding: 8px 16px;
-      border-radius: 40px;
-      font-family: monospace;
-      font-weight: 500;
-    }
     .stats-row {
       display: flex;
       gap: 16px;
@@ -150,13 +133,11 @@
     .stat-label {
       font-size: 14px;
       color: #4c5c4e;
-      letter-spacing: 0.5px;
     }
     .stat-number {
       font-size: 28px;
       font-weight: 700;
       color: #1e2f24;
-      margin-top: 8px;
     }
     .action-buttons {
       display: flex;
@@ -166,8 +147,6 @@
     .action-buttons .ios-button {
       width: auto;
       flex: 1;
-      background: rgba(44,110,47,0.85);
-      backdrop-filter: blur(10px);
     }
     .orders-section {
       background: rgba(255,255,255,0.7);
@@ -188,27 +167,18 @@
       border: 0.5px solid rgba(0,0,0,0.1);
       border-radius: 34px;
       padding: 10px 16px;
-      font-size: 15px;
     }
     .orders-table-wrapper {
       overflow-x: auto;
-      border-radius: 28px;
     }
     .orders-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 14px;
       min-width: 500px;
     }
-    .orders-table th {
-      text-align: left;
-      padding: 14px 10px;
-      background: rgba(0,0,0,0.03);
-      font-weight: 590;
-      color: #2b4b2e;
-    }
-    .orders-table td {
+    .orders-table th, .orders-table td {
       padding: 12px 10px;
+      text-align: left;
       border-bottom: 0.5px solid rgba(0,0,0,0.08);
     }
     .status-badge {
@@ -239,11 +209,6 @@
       max-height: 85vh;
       overflow-y: auto;
     }
-    .modal-content h3 {
-      font-size: 26px;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
     .form-group {
       margin-bottom: 20px;
     }
@@ -253,7 +218,7 @@
       display: block;
       color: #1e3a2b;
     }
-    .ios-input-light, .ios-select, .ios-textarea {
+    .ios-input-light, .ios-textarea {
       width: 100%;
       padding: 14px 18px;
       background: #f2f4f6;
@@ -280,41 +245,27 @@
       gap: 20px;
       align-items: center;
     }
-    .radio-label {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
     footer {
       text-align: center;
       margin-top: 24px;
       font-size: 13px;
       color: #3a5e40;
     }
-    footer a {
-      color: #2c6e2f;
-      text-decoration: none;
-      font-weight: 500;
-      border-bottom: 1px dashed #2c6e2f;
-    }
     .error-msg {
       background: rgba(255, 220, 220, 0.9);
       border-radius: 28px;
       padding: 12px;
       color: #b11;
-      margin-bottom: 16px;
     }
     .success-msg {
       background: rgba(200, 230, 200, 0.9);
       border-radius: 28px;
       padding: 12px;
       color: #1f6e43;
-      margin-bottom: 16px;
     }
     @media (max-width: 600px) {
-      body { padding: 12px; }
-      .stat-number { font-size: 22px; }
       .action-buttons { flex-direction: column; }
+      .stats-row { flex-direction: column; }
     }
   </style>
 </head>
@@ -323,66 +274,53 @@
   <div id="authPanel" class="glass-card auth-card">
     <h1><i class="fas fa-couch"></i> Мебель Шара</h1>
     <p>Партнёрская программа</p>
-    <input type="text" id="partnerIdInput" class="ios-input" maxlength="4" placeholder="Ваш 4-символьный ID" autocomplete="off">
-    <button id="loginBtn" class="ios-button"><i class="fas fa-arrow-right"></i> Войти</button>
-    <button id="showRegBtn" class="ios-button secondary"><i class="fas fa-user-plus"></i> Регистрация в партнёрке</button>
+    <input type="text" id="partnerIdInput" class="ios-input" maxlength="4" placeholder="Ваш ID">
+    <button id="loginBtn" class="ios-button">Войти</button>
+    <button id="showRegBtn" class="ios-button secondary">Регистрация</button>
   </div>
 
-  <div id="dashboard" class="dashboard fade-in">
+  <div id="dashboard" class="dashboard">
     <div class="glass-card profile-header">
       <div class="partner-info">
-        <div class="avatar-icon"><i class="fas fa-user-astronaut"></i></div>
-        <div>
-          <div class="partner-name" id="partnerName">—</div>
-          <div class="partner-id-badge" id="displayPartnerId">ID: —</div>
-        </div>
+        <div class="avatar-icon"><i class="fas fa-user"></i></div>
+        <div><span id="partnerName">—</span><br><span id="displayPartnerId">ID: —</span></div>
       </div>
     </div>
     <div class="stats-row">
-      <div class="stat-item"><div class="stat-label">Всего заказов, ₽</div><div class="stat-number" id="totalSum">0 ₽</div></div>
-      <div class="stat-item"><div class="stat-label">Оплачено, ₽</div><div class="stat-number" id="paidSum">0 ₽</div></div>
+      <div class="stat-item"><div class="stat-label">Всего заказов, ₽</div><div class="stat-number" id="totalSum">0</div></div>
+      <div class="stat-item"><div class="stat-label">Оплачено, ₽</div><div class="stat-number" id="paidSum">0</div></div>
     </div>
     <div class="action-buttons">
-      <button class="ios-button" id="createOrderBtn"><i class="fas fa-plus-circle"></i> Заявка</button>
-      <button class="ios-button" id="viewOrdersBtn"><i class="fas fa-list-ul"></i> Заказы</button>
+      <button id="createOrderBtn" class="ios-button">Заявка</button>
+      <button id="viewOrdersBtn" class="ios-button">Заказы</button>
     </div>
-    <div id="ordersPanel" class="orders-section" style="display: none;">
+    <div id="ordersPanel" class="orders-section" style="display:none">
       <div class="filter-bar">
-        <select id="statusFilter" class="filter-select">
-          <option value="Все">Все статусы</option>
-          <option value="Новая">Новая</option>
-          <option value="Замер назначен">Замер</option>
-          <option value="Счет выставлен">Счет</option>
-          <option value="Оплачено">Оплачено</option>
-          <option value="Доставлена">Доставлена</option>
-          <option value="Собрана">Собрана</option>
-          <option value="Отказ клиента">Отказ</option>
-        </select>
-        <input type="date" id="dateFrom" class="filter-date" placeholder="с">
-        <input type="date" id="dateTo" class="filter-date" placeholder="по">
-        <button id="applyFilterBtn" class="ios-button" style="padding: 10px 20px;">Применить</button>
+        <select id="statusFilter"><option>Все</option><option>Новая</option><option>Оплачено</option><option>Доставлена</option><option>Собрана</option><option>Отказ</option></select>
+        <input type="date" id="dateFrom"> <input type="date" id="dateTo">
+        <button id="applyFilterBtn" class="ios-button">Применить</button>
       </div>
-      <div id="ordersList"><div class="loading">Загрузка...</div></div>
+      <div id="ordersList">Загрузка...</div>
     </div>
   </div>
-  <footer><i class="fas fa-file-signature"></i> <a href="#" id="contractLink">Агентский договор</a></footer>
+  <footer><a href="#" id="contractLink">Агентский договор</a></footer>
 </div>
 
-<!-- Модалка заявки -->
+<!-- Модалка заказа -->
 <div id="orderModal" class="modal">
   <div class="modal-content">
-    <h3><i class="fas fa-pen-alt"></i> Новая заявка</h3>
-    <div class="form-group"><label>ФИО клиента *</label><input type="text" id="clientName" class="ios-input-light" placeholder="Иванов Иван"></div>
-    <div class="form-group"><label>Телефон * (10 цифр)</label><input type="tel" id="clientPhone" class="ios-input-light" maxlength="10" placeholder="9123456789"></div>
-    <div class="form-group"><label>Адрес</label><input type="text" id="address" class="ios-input-light" placeholder="Москва, ул..."></div>
-    <div class="form-group"><label>Категории мебели</label><div class="checkbox-group" id="categoriesGroup"></div></div>
-    <div class="form-group"><label>Нужен замер?</label><div class="radio-group"><label class="radio-label"><input type="radio" name="measure" value="Да" checked> Да</label><label class="radio-label"><input type="radio" name="measure" value="Нет"> Нет</label></div></div>
-    <div class="form-group"><label>Нужна сборка?</label><div class="radio-group"><label class="radio-label"><input type="radio" name="assembly" value="Да" checked> Да</label><label class="radio-label"><input type="radio" name="assembly" value="Нет"> Нет</label></div></div>
-    <div class="form-group"><label>Доставка/Самовывоз</label><div class="radio-group"><label class="radio-label"><input type="radio" name="delivery" value="Доставка" checked> Доставка</label><label class="radio-label"><input type="radio" name="delivery" value="Самовывоз"> Самовывоз (Подольск)</label></div></div>
-    <div class="form-group"><label>Когда позвонить клиенту</label><input type="datetime-local" id="callTime" class="ios-input-light"></div>
+    <h3>Новая заявка</h3>
+    <div class="form-group"><label>ФИО клиента *</label><input id="clientName" class="ios-input-light"></div>
+    <div class="form-group"><label>Телефон (10 цифр) *</label><input id="clientPhone" class="ios-input-light" maxlength="10"></div>
+    <div class="form-group"><label>Адрес</label><input id="address" class="ios-input-light"></div>
+    <div class="form-group"><label>Категории</label><div id="categoriesGroup" class="checkbox-group"></div></div>
+    <div class="form-group"><label>Замер?</label><div class="radio-group"><label><input type="radio" name="measure" value="Да" checked> Да</label><label><input type="radio" name="measure" value="Нет"> Нет</label></div></div>
+    <div class="form-group"><label>Сборка?</label><div class="radio-group"><label><input type="radio" name="assembly" value="Да" checked> Да</label><label><input type="radio" name="assembly" value="Нет"> Нет</label></div></div>
+    <div class="form-group"><label>Доставка/Самовывоз</label><div class="radio-group"><label><input type="radio" name="delivery" value="Доставка" checked> Доставка</label><label><input type="radio" name="delivery" value="Самовывоз"> Самовывоз</label></div></div>
+    <div class="form-group"><label>Когда позвонить</label><input type="datetime-local" id="callTime" class="ios-input-light"></div>
     <div class="form-group"><label>Комментарий</label><textarea id="comment" rows="2" class="ios-textarea"></textarea></div>
-    <div class="modal-buttons" style="display: flex; gap: 12px; margin-top: 24px;">
-      <button id="closeModalBtn" class="ios-button" style="background: #aaa;">Отмена</button>
+    <div style="display:flex; gap:12px; margin-top:20px">
+      <button id="closeModalBtn" class="ios-button" style="background:#aaa;">Отмена</button>
       <button id="submitOrderBtn" class="ios-button">Отправить</button>
     </div>
   </div>
@@ -391,38 +329,26 @@
 <!-- Модалка регистрации -->
 <div id="regModal" class="reg-modal">
   <div class="modal-content">
-    <h3><i class="fas fa-user-plus"></i> Регистрация партнёра</h3>
-    <div class="form-group"><label>ФИО *</label><input type="text" id="regFullName" class="ios-input-light" placeholder="Иванов Иван Иванович"></div>
-    <div class="form-group">
-      <label>Телефон * (10 цифр)</label>
-      <div style="position: relative;">
-        <span style="position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: #8E8E93; font-weight: 500;">+7</span>
-        <input type="tel" id="regPhone" class="ios-input-light" maxlength="10" placeholder="9123456789" style="padding-left: 48px;">
-      </div>
-      <small style="color: #8E8E93; display: block; margin-top: 6px;">Введите 10 цифр после +7</small>
-    </div>
-    <div class="form-group">
-      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Max_%28app%29_logo.svg/512px-Max_%28app%29_logo.svg.png" alt="МАКС" style="width: 32px; height: 32px; border-radius: 12px;">
-        <label style="margin: 0; font-weight: 500;">ID в мессенджере МАКС <span style="color: #6c7a6e;">(необязательно)</span></label>
-      </div>
-      <input type="text" id="regMessengerId" class="ios-input-light" placeholder="Ваш логин @example">
-    </div>
+    <h3>Регистрация партнёра</h3>
+    <div class="form-group"><label>ФИО *</label><input id="regFullName" class="ios-input-light"></div>
+    <div class="form-group"><label>Телефон (10 цифр) *</label><div style="position:relative"><span style="position:absolute; left:18px; top:50%; transform:translateY(-50%);">+7</span><input id="regPhone" class="ios-input-light" maxlength="10" style="padding-left:48px;"></div><small>Введите 10 цифр после +7</small></div>
+    <div class="form-group"><div style="display:flex; gap:12px; align-items:center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Max_%28app%29_logo.svg/512px-Max_%28app%29_logo.svg.png" width="32" style="border-radius:12px"><label>ID в МАКС (необязательно)</label></div><input id="regMessengerId" class="ios-input-light"></div>
     <div id="regMessage"></div>
-    <div class="modal-buttons" style="display: flex; gap: 12px; margin-top: 20px;">
-      <button id="closeRegBtn" class="ios-button" style="background: #aaa;">Отмена</button>
+    <div style="display:flex; gap:12px; margin-top:20px">
+      <button id="closeRegBtn" class="ios-button" style="background:#aaa;">Отмена</button>
       <button id="submitRegBtn" class="ios-button">Зарегистрироваться</button>
     </div>
   </div>
 </div>
 
 <script>
-  // ========== ВАШ URL ВЕБ-ПРИЛОЖЕНИЯ ==========
+  // ==================== ВАШ URL ====================
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyWtZ0rX2QpBlyAMaFbgxtx4au9TjuY9WsOMEuJJL3dfHi0sXUmMmuA-_qYkA3veGhevA/exec';
   
   let currentPartnerId = null;
-
-  // DOM элементы
+  const categoriesList = ['Кухня','Спальня','Гостиная','Детская','Прихожая','Шкаф-купе','Диван','Мягкая кровать'];
+  
+  // DOM
   const authPanel = document.getElementById('authPanel');
   const dashboard = document.getElementById('dashboard');
   const partnerNameSpan = document.getElementById('partnerName');
@@ -431,31 +357,18 @@
   const paidSumSpan = document.getElementById('paidSum');
   const ordersPanel = document.getElementById('ordersPanel');
   const ordersListDiv = document.getElementById('ordersList');
-  const viewOrdersBtn = document.getElementById('viewOrdersBtn');
   const createOrderBtn = document.getElementById('createOrderBtn');
-  const modal = document.getElementById('orderModal');
-  const closeModalBtn = document.getElementById('closeModalBtn');
-  const submitOrderBtn = document.getElementById('submitOrderBtn');
-  const applyFilterBtn = document.getElementById('applyFilterBtn');
-  const statusFilter = document.getElementById('statusFilter');
-  const dateFrom = document.getElementById('dateFrom');
-  const dateTo = document.getElementById('dateTo');
-  const contractLink = document.getElementById('contractLink');
-  const showRegBtn = document.getElementById('showRegBtn');
+  const viewOrdersBtn = document.getElementById('viewOrdersBtn');
+  const orderModal = document.getElementById('orderModal');
   const regModal = document.getElementById('regModal');
-  const closeRegBtn = document.getElementById('closeRegBtn');
+  const submitOrderBtn = document.getElementById('submitOrderBtn');
   const submitRegBtn = document.getElementById('submitRegBtn');
-  const regFullName = document.getElementById('regFullName');
-  const regPhone = document.getElementById('regPhone');
-  const regMessengerId = document.getElementById('regMessengerId');
   const regMessage = document.getElementById('regMessage');
-
-  // Замените ссылку на реальный документ
-  contractLink.href = 'https://docs.google.com/document/d/ваш_документ/edit';
-  contractLink.target = '_blank';
-
-  const categoriesList = ['Кухня','Спальня','Гостиная','Детская','Прихожая','Шкаф-купе','Диван','Мягкая кровать'];
-  function renderCategoriesCheckboxes() {
+  
+  // Вспомогательные функции
+  function formatCurrency(amount) { return Number(amount).toLocaleString('ru-RU') + ' ₽'; }
+  function escapeHtml(str) { return String(str).replace(/[&<>]/g, function(m){return m==='&'?'&amp;':m==='<'?'&lt;':'&gt;';}); }
+  function renderCategories() {
     const container = document.getElementById('categoriesGroup');
     container.innerHTML = '';
     categoriesList.forEach(cat => {
@@ -466,39 +379,40 @@
     });
   }
   function getSelectedCategories() {
-    const checkboxes = document.querySelectorAll('#categoriesGroup input[type="checkbox"]:checked');
-    return Array.from(checkboxes).map(cb => cb.value).join(', ');
+    return Array.from(document.querySelectorAll('#categoriesGroup input:checked')).map(cb => cb.value).join(', ');
   }
-
-  function formatCurrency(amount) {
-    amount = amount || 0;
-    return new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB', minimumFractionDigits: 0 }).format(amount);
+  
+  // Логирование ошибок
+  function logError(context, error) {
+    console.error(`[${context}]`, error);
+    const msg = document.createElement('div');
+    msg.className = 'error-msg';
+    msg.innerText = `${context}: ${error.message || error}`;
+    document.body.prepend(msg);
+    setTimeout(() => msg.remove(), 5000);
   }
-
-  async function loadPartnerFullInfo(partnerId) {
+  
+  // GET запросы
+  async function loadPartnerInfo(partnerId) {
     try {
       const url = `${SCRIPT_URL}?action=getPartnerInfo&partnerId=${encodeURIComponent(partnerId)}`;
+      console.log('GET info:', url);
       const resp = await fetch(url);
       const data = await resp.json();
-      if (data.error) {
-        partnerNameSpan.innerText = 'Ошибка';
-        totalSumSpan.innerText = '0 ₽';
-        paidSumSpan.innerText = '0 ₽';
-        return false;
-      }
-      partnerNameSpan.innerText = data.name || 'Риелтор';
+      console.log('GET info ответ:', data);
+      if (data.error) throw new Error(data.error);
+      partnerNameSpan.innerText = data.name || 'Без имени';
       totalSumSpan.innerText = formatCurrency(data.totalOrdersSum);
       paidSumSpan.innerText = formatCurrency(data.paidOrdersSum);
       return true;
     } catch (err) {
-      console.error(err);
-      partnerNameSpan.innerText = 'Ошибка соединения';
+      logError('loadPartnerInfo', err);
       return false;
     }
   }
-
+  
   async function loadOrders(partnerId, status, from, to) {
-    ordersListDiv.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-pulse"></i> Загрузка...</div>';
+    ordersListDiv.innerHTML = 'Загрузка...';
     try {
       let url = `${SCRIPT_URL}?action=getOrders&partnerId=${encodeURIComponent(partnerId)}`;
       if (status && status !== 'Все') url += `&status=${encodeURIComponent(status)}`;
@@ -506,151 +420,123 @@
       if (to) url += `&dateTo=${to}`;
       const resp = await fetch(url);
       const orders = await resp.json();
-      if (orders.error) {
-        ordersListDiv.innerHTML = `<div class="error-msg">${orders.error}</div>`;
-        return;
-      }
-      if (!orders.length) {
-        ordersListDiv.innerHTML = '<div style="padding: 20px; text-align:center;">Заказов не найдено</div>';
-        return;
-      }
-      let html = `<div class="orders-table-wrapper"><table class="orders-table">
-        <thead><tr><th>ID</th><th>Дата</th><th>Клиент</th><th>Тел.</th><th>Статус</th><th>Сумма заказа</th><th>Оплачено</th></tr></thead><tbody>`;
-      orders.forEach(order => {
-        html += `<tr>
-          <td>${escapeHtml(order.id)}</td>
-          <td>${order.date ? new Date(order.date).toLocaleDateString() : ''}</td>
-          <td>${escapeHtml(order.clientName)}</td>
-          <td>${escapeHtml(order.clientPhone)}</td>
-          <td><span class="status-badge">${escapeHtml(order.status)}</span></td>
-          <td>${formatCurrency(order.orderSum)}</td>
-          <td>${formatCurrency(order.paidSum)}</td>
-        </tr>`;
+      if (orders.error) throw new Error(orders.error);
+      if (!orders.length) { ordersListDiv.innerHTML = 'Нет заказов'; return; }
+      let html = `<div class="orders-table-wrapper"><table class="orders-table"><tr><th>ID</th><th>Дата</th><th>Клиент</th><th>Тел.</th><th>Статус</th><th>Сумма</th><th>Оплачено</th></tr>`;
+      orders.forEach(o => {
+        html += `<tr><td>${escapeHtml(o.id)}</td><td>${o.date ? new Date(o.date).toLocaleDateString() : ''}</td><td>${escapeHtml(o.clientName)}</td><td>${escapeHtml(o.clientPhone)}</td><td class="status-badge">${escapeHtml(o.status)}</td><td>${formatCurrency(o.orderSum)}</td><td>${formatCurrency(o.paidSum)}</td></tr>`;
       });
-      html += `</tbody></table></div>`;
+      html += `</table></div>`;
       ordersListDiv.innerHTML = html;
     } catch (err) {
-      ordersListDiv.innerHTML = `<div class="error-msg">Ошибка: ${err.message}</div>`;
+      logError('loadOrders', err);
+      ordersListDiv.innerHTML = 'Ошибка загрузки заказов';
     }
   }
-  function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
-
-  async function createOrder(orderData) {
-    const response = await fetch(SCRIPT_URL, {
-      method: 'POST',
-      body: JSON.stringify(orderData),
-      headers: { 'Content-Type': 'application/json' }
-    });
-    return await response.json();
+  
+  // POST запросы с детальным логом
+  async function postRequest(payload, actionName) {
+    console.log(`POST ${actionName} отправляем:`, payload);
+    try {
+      const response = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'application/json' }
+      });
+      console.log(`POST ${actionName} статус:`, response.status);
+      const text = await response.text();
+      console.log(`POST ${actionName} сырой ответ:`, text);
+      let result;
+      try { result = JSON.parse(text); } catch(e) { result = { success: false, error: 'Не JSON ответ: ' + text.substring(0,200) }; }
+      console.log(`POST ${actionName} разобранный ответ:`, result);
+      return result;
+    } catch (err) {
+      console.error(`POST ${actionName} ошибка сети:`, err);
+      return { success: false, error: err.message };
+    }
   }
-
+  
+  // Регистрация
+  async function registerPartner() {
+    const fullName = document.getElementById('regFullName').value.trim();
+    let phone = document.getElementById('regPhone').value.replace(/\D/g, '').slice(0,10);
+    const messengerId = document.getElementById('regMessengerId').value.trim();
+    if (!fullName || phone.length !== 10) {
+      regMessage.innerHTML = '<div class="error-msg">Заполните ФИО и 10 цифр телефона</div>';
+      return;
+    }
+    regMessage.innerHTML = '<div class="success-msg">Отправка...</div>';
+    const result = await postRequest({ action: 'register', fullName, phone, messengerId }, 'register');
+    if (result.success) {
+      regMessage.innerHTML = `<div class="success-msg">Регистрация успешна! Ваш ID: ${result.partnerId}</div>`;
+      setTimeout(() => {
+        regModal.style.display = 'none';
+        document.getElementById('partnerIdInput').value = result.partnerId;
+        regMessage.innerHTML = '';
+      }, 2000);
+    } else {
+      regMessage.innerHTML = `<div class="error-msg">${result.error || 'Ошибка регистрации'}</div>`;
+    }
+  }
+  
+  // Создание заказа
   async function onSubmitOrder() {
     if (!currentPartnerId) return;
     const clientName = document.getElementById('clientName').value.trim();
-    let clientPhone = document.getElementById('clientPhone').value.trim();
-    clientPhone = clientPhone.replace(/\D/g, '').slice(0,10);
-    if (clientName === '' || clientPhone === '' || clientPhone.length !== 10) {
-      alert('Заполните ФИО и телефон (ровно 10 цифр)');
+    let clientPhone = document.getElementById('clientPhone').value.replace(/\D/g, '').slice(0,10);
+    if (!clientName || clientPhone.length !== 10) {
+      alert('Заполните ФИО и телефон (10 цифр)');
       return;
     }
-    const categories = getSelectedCategories();
-    const needMeasure = document.querySelector('input[name="measure"]:checked').value;
-    const needAssembly = document.querySelector('input[name="assembly"]:checked').value;
-    const deliveryType = document.querySelector('input[name="delivery"]:checked').value;
-    const callTime = document.getElementById('callTime').value;
-    const comment = document.getElementById('comment').value;
-
     const payload = {
       partnerId: currentPartnerId,
-      clientName, clientPhone,
+      clientName,
+      clientPhone: clientPhone,
       address: document.getElementById('address').value,
-      categories: categories,
-      needMeasure, needAssembly, deliveryType,
-      callTime, comment,
+      categories: getSelectedCategories(),
+      needMeasure: document.querySelector('input[name="measure"]:checked').value,
+      needAssembly: document.querySelector('input[name="assembly"]:checked').value,
+      deliveryType: document.querySelector('input[name="delivery"]:checked').value,
+      callTime: document.getElementById('callTime').value,
+      comment: document.getElementById('comment').value,
       orderSum: 0
     };
-    const result = await createOrder(payload);
+    const result = await postRequest(payload, 'createOrder');
     if (result.success) {
-      alert(`Заявка ${result.orderId} создана! Клиенту перезвонят.`);
-      modal.style.display = 'none';
-      await loadPartnerFullInfo(currentPartnerId);
+      alert(`Заявка ${result.orderId} создана!`);
+      orderModal.style.display = 'none';
+      await loadPartnerInfo(currentPartnerId);
       if (ordersPanel.style.display !== 'none') {
-        loadOrders(currentPartnerId, statusFilter.value, dateFrom.value, dateTo.value);
+        loadOrders(currentPartnerId, document.getElementById('statusFilter').value, document.getElementById('dateFrom').value, document.getElementById('dateTo').value);
       }
     } else {
       alert('Ошибка: ' + (result.error || 'неизвестная'));
     }
   }
-
-  function getPhoneForSubmit() {
-    const raw = regPhone.value.replace(/\D/g, '');
-    return raw.slice(0,10);
-  }
-
-  async function registerPartner() {
-    const fullName = regFullName.value.trim();
-    const phone = getPhoneForSubmit();
-    const messengerId = regMessengerId.value.trim();
-    
-    regMessage.innerHTML = '';
-    if (!fullName || !phone || phone.length !== 10) {
-      regMessage.innerHTML = '<div class="error-msg">Заполните ФИО и корректный телефон (10 цифр)</div>';
-      return;
-    }
-    
-    try {
-      const response = await fetch(SCRIPT_URL, {
-        method: 'POST',
-        body: JSON.stringify({ action: 'register', fullName, phone, messengerId }),
-        headers: { 'Content-Type': 'application/json' }
-      });
-      const result = await response.json();
-      if (result.success) {
-        regMessage.innerHTML = `<div class="success-msg">Регистрация успешна! Ваш ID: <strong>${result.partnerId}</strong>. Теперь войдите.</div>`;
-        setTimeout(() => {
-          regModal.style.display = 'none';
-          document.getElementById('partnerIdInput').value = result.partnerId;
-          regFullName.value = '';
-          regPhone.value = '';
-          regMessengerId.value = '';
-          regMessage.innerHTML = '';
-        }, 2000);
-      } else {
-        regMessage.innerHTML = `<div class="error-msg">${result.error || 'Ошибка регистрации'}</div>`;
-      }
-    } catch (err) {
-      regMessage.innerHTML = `<div class="error-msg">Ошибка соединения: ${err.message}</div>`;
-    }
-  }
-
+  
+  // Вход
   async function login() {
     const pid = document.getElementById('partnerIdInput').value.trim().toUpperCase();
-    if (!pid || pid.length !== 4) {
-      alert('Введите корректный 4-символьный ID');
-      return;
-    }
-    const testUrl = `${SCRIPT_URL}?action=getPartnerInfo&partnerId=${encodeURIComponent(pid)}`;
-    const resp = await fetch(testUrl);
+    if (!pid || pid.length !== 4) { alert('Введите 4-символьный ID'); return; }
+    const url = `${SCRIPT_URL}?action=getPartnerInfo&partnerId=${encodeURIComponent(pid)}`;
+    const resp = await fetch(url);
     const info = await resp.json();
-    if (info.error) {
-      alert('Риелтор с таким ID не найден. Проверьте ID или зарегистрируйтесь.');
-      return;
-    }
+    if (info.error) { alert('Риелтор не найден'); return; }
     currentPartnerId = pid;
     localStorage.setItem('partnerId', pid);
     authPanel.style.display = 'none';
     dashboard.style.display = 'block';
     displayPartnerIdSpan.innerText = `ID: ${pid}`;
-    partnerNameSpan.innerText = info.name || 'Риелтор';
+    partnerNameSpan.innerText = info.name || 'Без имени';
     totalSumSpan.innerText = formatCurrency(info.totalOrdersSum);
     paidSumSpan.innerText = formatCurrency(info.paidOrdersSum);
   }
-
+  
   function showOrders() {
     ordersPanel.style.display = 'block';
-    loadOrders(currentPartnerId, statusFilter.value, dateFrom.value, dateTo.value);
+    loadOrders(currentPartnerId, document.getElementById('statusFilter').value, document.getElementById('dateFrom').value, document.getElementById('dateTo').value);
   }
-
+  
   // Обработчики
   document.getElementById('loginBtn').addEventListener('click', login);
   viewOrdersBtn.addEventListener('click', showOrders);
@@ -660,33 +546,24 @@
     document.getElementById('address').value = '';
     document.getElementById('comment').value = '';
     document.getElementById('callTime').value = '';
-    renderCategoriesCheckboxes();
-    modal.style.display = 'flex';
+    renderCategories();
+    orderModal.style.display = 'flex';
   });
-  closeModalBtn.addEventListener('click', () => modal.style.display = 'none');
+  document.getElementById('closeModalBtn').addEventListener('click', () => orderModal.style.display = 'none');
   submitOrderBtn.addEventListener('click', onSubmitOrder);
-  applyFilterBtn.addEventListener('click', () => {
-    if (currentPartnerId && ordersPanel.style.display !== 'none')
-      loadOrders(currentPartnerId, statusFilter.value, dateFrom.value, dateTo.value);
+  document.getElementById('applyFilterBtn').addEventListener('click', () => {
+    if (currentPartnerId) loadOrders(currentPartnerId, document.getElementById('statusFilter').value, document.getElementById('dateFrom').value, document.getElementById('dateTo').value);
   });
-  window.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; if (e.target === regModal) regModal.style.display = 'none'; };
-  
-  showRegBtn.addEventListener('click', () => { regModal.style.display = 'flex'; regMessage.innerHTML = ''; });
-  closeRegBtn.addEventListener('click', () => { regModal.style.display = 'none'; });
+  window.onclick = (e) => { if (e.target === orderModal) orderModal.style.display = 'none'; if (e.target === regModal) regModal.style.display = 'none'; };
+  document.getElementById('showRegBtn').addEventListener('click', () => regModal.style.display = 'flex');
+  document.getElementById('closeRegBtn').addEventListener('click', () => regModal.style.display = 'none');
   submitRegBtn.addEventListener('click', registerPartner);
-  
-  regPhone.addEventListener('input', (e) => {
-    e.target.value = e.target.value.replace(/\D/g, '').slice(0,10);
-  });
-  
+  document.getElementById('regPhone').addEventListener('input', (e) => e.target.value = e.target.value.replace(/\D/g, '').slice(0,10));
+  document.getElementById('clientPhone').addEventListener('input', (e) => e.target.value = e.target.value.replace(/\D/g, '').slice(0,10));
   const savedId = localStorage.getItem('partnerId');
   if (savedId) document.getElementById('partnerIdInput').value = savedId;
-  
-  const phoneInput = document.getElementById('clientPhone');
-  phoneInput.addEventListener('input', (e) => {
-    e.target.value = e.target.value.replace(/\D/g, '').slice(0,10);
-  });
-  renderCategoriesCheckboxes();
+  renderCategories();
+  document.getElementById('contractLink').href = 'https://docs.google.com/document/d/ваш_документ/edit';
 </script>
 </body>
 </html>
